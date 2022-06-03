@@ -6,7 +6,7 @@
 int main(void)
 {
 	int i, j, k;
-	
+
 	for (i = '0'; i <= '9'; i++)
 	{
 		j = i + 1;
@@ -14,12 +14,16 @@ int main(void)
 		while (j <= '9')
 		{
 			k = j + 1;
-			putchar(i);
-			putchar(j);
-			if (i == '8' && j == '9')
-				break;
-			putchar(',');
-			putchar(' ');
+			while (k <= '9')
+			{
+				putchar(i);
+				putchar(j);
+				if (i == '7' && j == '8' && k == '9')
+					break;
+				putchar(',');
+				putchar(' ');
+				k++;
+			}
 			j++;
 		}
 	}
