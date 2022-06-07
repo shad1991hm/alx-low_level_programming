@@ -7,5 +7,6 @@
  */
 int print_last_digit(int pld)
 {
+	pld = abs(pld);
 	return (pld % 10);
 }
