@@ -4,8 +4,7 @@
  * _abs - chech absolute value
  * Return: absolut value;
  */
-int _abs(int)
+int _abs(int v)
 {
-	int v;
 	return (abs(v));
 }
