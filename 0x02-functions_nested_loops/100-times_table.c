@@ -16,19 +16,20 @@ void print_times_table(int n)
 			{
 				p = a * b;
 				if (b == 0)
-					_putchar(k + '0');
+					_putchar(p + '0');
 				else if (p < 10 && b != 0)
 				{
 					_putchar(',');
 					_putchar(' ');
 					_putchar(' ');
 					_putchar(' ');
+				}
 				else if (p >= 10 && p < 100)
 				{
 					_putchar(',');
 					_putchar(' ');
 					_putchar(' ');
-					_putchar(((p / 10) + '0');
+					_putchar((p / 10) + '0');
 					_putchar((p % 10) + '0');
 				}
 				else if (p >= 100)
