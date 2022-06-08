@@ -23,6 +23,7 @@ void print_times_table(int n)
 					_putchar(' ');
 					_putchar(' ');
 					_putchar(' ');
+					_putchar(p + '0');
 				}
 				else if (p >= 10 && p < 100)
 				{
