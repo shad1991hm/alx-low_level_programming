@@ -1,4 +1,5 @@
-#incude<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * main - Start here
