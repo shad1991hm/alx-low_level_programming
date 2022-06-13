@@ -1,6 +1,5 @@
 #!/bin/bash
-echo "commit message"
-read message
+message = $1
 git add .
 git commit -m '$message'
 git push
