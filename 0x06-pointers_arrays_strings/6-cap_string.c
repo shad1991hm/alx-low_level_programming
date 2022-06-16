@@ -1,24 +1,32 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
- * cap_string - function
- * @str: Pointer
- * Return: poniter return to function.
+ * cap_string - capitalizes all words in a string
+ * @s: string to capitalize
+ *
+ * Return: address of s
  */
-char *cap_string(char *str)
+char *cap_string(char *s)
 {
-	int symb[14] = {' ', '\t', '\n', ',', ';', '.', '!', '?', '"', '(', ')', '{', '}'};
-	int i, j;
+	int i = 0, j;
+	char a[] = " \t\n,;.!?\"(){}";
 
-	for (i = 0; str[i] != '\0'; i++)
+	while (*(s + i))
 	{
-		if (str[0] >= 97 && str[0] <= 122)
+		if (*(s + i) >= 'a' && *(s + i) <= 'z')
 		{
-			str[0] = str[0] - 32;
+			if (i == 0)
+				*(s + i) -= 'a' - 'A';
+			else
+			{
+				for (j = 0; j <= 12; j++)
+				{
+					if (a[j] == *(s + i - 1))
+						*(s + i) -= 'a' - 'A';
+				}
+			}
 		}
-		for (j = 0; j < 14; j++)
-			if (str[i] >= 97 && str[i] <= 122 && str[i - 1] == symb[j])
-				str[i] = str[i] - 32;
+		i++;
 	}
-	return (str);
+	return (s);
 }
