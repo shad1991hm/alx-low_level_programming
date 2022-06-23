@@ -24,5 +24,5 @@ int _prime(int n, int i)
 		return (0);
 	else if (i == n)
 		return (1);
-	return (get_prime(n, i + 1));
+	return (_prime(n, i + 1));
 }
