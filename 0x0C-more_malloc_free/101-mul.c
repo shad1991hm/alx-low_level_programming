@@ -1,7 +1,9 @@
 #include "main.h"
 #include <ctype.h>
 
-
+void _is_zero(char *argv[]);
+char *_initialize_array(char *ar, int lar);
+int _checknum(char *argv[], int n);
 /**
  * _is_zero - determines if any number is zero
  * @argv: argument vector.
