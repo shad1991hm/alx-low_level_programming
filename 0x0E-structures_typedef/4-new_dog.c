@@ -11,32 +11,36 @@
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *my_dog;
-	char *name_cpy;
-	char *owner_cpy;
+	dog_t *cutie_dog;
+	int name_l = 0, own_l = 0;
 
-	name_cpy = malloc(sizeof(char) * _strlen(name));
-	owner_cpy = malloc(sizeof(char) * _strlen(owner));
-	if (name_cpy == NULL || owner_cpy == NULL)
+	if (name != NULL && owner != NULL)
 	{
-		free(name_cpy);
-		free(owner_cpy);
-		return (NULL);
+		name_l = _strlen(name) + 1;
+		own_l = _strlen(owner) + 1;
+		cutie_dog = malloc(sizeof(dog_t));
+		if (cutie_dog == NULL)
+			return (NULL);
+		cutie_dog->name = malloc(sizeof(char) * name_l);
+		if (cutie_dog->name == NULL)
+		{
+			free(cutie_dog);
+			return (NULL);
+		}
+		cutie_dog->owner = malloc(sizeof(char) * own_l);
+		if (cutie_dog->owner == NULL)
+		{
+			free(cutie_dog->name);
+			free(cutie_dog);
+			return (NULL);
+		}
+		cutie_dog->name = _strcpy(cutie_dog->name, name);
+		cutie_dog->owner = _strcpy(cutie_dog->owner, owner);
+		cutie_dog->age = age;
 	}
-	_strcpy(name_cpy, name);
-	_strcpy(owner_cpy, owner);
-	my_dog = malloc(sizeof(dog_t));
-	if (my_dog == NULL)
-	{
-		free(name_cpy);
-		free(owner_cpy);
-		return (NULL);
-	}
-	my_dog->name = name_cpy;
-	my_dog->age = age;
-	my_dog->owner = owner_cpy;
-	return (my_dog);
+	return (cutie_dog);
 }
+
 
 /**
  * _strcpy - Copy a string
@@ -47,17 +51,15 @@ dog_t *new_dog(char *name, float age, char *owner)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int i;
 
-	while (*(src + i) != '\0')
+	for (i = 0; src[i] != '\0'; i++)
 	{
-		*(dest + i) = *(src + i);
-		i++;
+		dest[i] = src[i];
 	}
-	*(dest + i) = '\0';
+	dest[i++] = '\0';
 	return (dest);
 }
-
 /**
  * _strlen - Determines the length of a string.
  * @s: Set of characters
@@ -66,12 +68,11 @@ char *_strcpy(char *dest, char *src)
  */
 int _strlen(char *s)
 {
-	int i = 0;
+	int c = 0;
 
-	while (*(s + i) != '\0')
+	for (; *s != '\0'; s++)
 	{
-		i++;
+		c++;
 	}
-	i++;
-	return (i);
+	return (c);
 }
