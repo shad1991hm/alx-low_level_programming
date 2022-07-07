@@ -3,46 +3,26 @@
 #include "variadic_functions.h"
 
 /**
- * print_all - Print strings with a separator.
- * @format: Format string
+ * print_numbers - prints numbers, followed by a new line.
+ * @separator: separator to print between numbers
+ * @n: number of numbers to print
  *
- * Return: Nothing (void)
+ * Return: void
  */
-void print_all(const char *const format, ...)
+void print_numbers(const char *separator, const unsigned int n, ...)
 {
-	unsigned int i = 0;
-	char *arg_s;
-	va_list arguments;
+	unsigned int i;
+	int num;
+	va_list valist;
 
-	va_start(arguments, format);
-	while (*(format + i) != '\0' && (format))
+	va_start(valist, n);
+	for (i = 0; i < n; i++)
 	{
-		switch (*(format + i))
-		{
-		case 's':
-			arg_s = va_arg(arguments, char *);
-			if (arg_s == NULL)
-			{
-				printf("(nil)");
-				break;
-			}
-			printf("%s", arg_s);
-			break;
-		case 'i':
-			printf("%d", va_arg(arguments, int));
-			break;
-		case 'f':
-			printf("%f", (float) va_arg(arguments, double));
-			break;
-		case 'c':
-			printf("%c", (char) va_arg(arguments, int));
-		default:
-			i++;
-			continue;
-		}
-		if (*(format + i + 1) != '\0')
-			printf(", ");
+		num = va_arg(valist, int);
+		printf("%d", num);
+		if (i < n - 1 && separator)
+			printf("%s", separator);
 	}
 	printf("\n");
-	va_end(arguments);
+	va_end(valist);
 }
