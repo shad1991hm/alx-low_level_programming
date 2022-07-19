@@ -1,34 +1,65 @@
 #include "lists.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * free_listint_safe - prints the elements of a linked list of structures
- * @head: the pointer to the pointer to the first element of the list
+ * _ra - reallocates memory for an array of pointers
+ * to the nodes in a linked list
+ * @list: the old list to append
+ * @size: size of the new list (always one more than the old list)
+ * @new: new node to add to the list
  *
- * Return: the number of nodes
+ * Return: pointer to the new list
+ */
+listint_t **_ra(listint_t **list, size_t size, listint_t *new)
+{
+	listint_t **newlist;
+	size_t i;
+
+	newlist = malloc(size * sizeof(listint_t *));
+	if (newlist == NULL)
+	{
+		free(list);
+		exit(98);
+	}
+	for (i = 0; i < size - 1; i++)
+		newlist[i] = list[i];
+	newlist[i] = new;
+	free(list);
+	return (newlist);
+}
+
+/**
+ * free_listint_safe - frees a listint_t linked list.
+ * @head: double pointer to the start of the list
+ *
+ * Return: the number of nodes in the list
  */
 size_t free_listint_safe(listint_t **head)
 {
-	int pdiff, count;
-	listint_t *temp;
+	size_t i, num = 0;
+	listint_t **list = NULL;
+	listint_t *next;
 
 	if (head == NULL || *head == NULL)
-		return (0);
-	for (count = 0; *head; count++)
+		return (num);
+	while (*head != NULL)
 	{
-		pdiff = *head - (*head)->next;
-		if (pdiff > 0)
+		for (i = 0; i < num; i++)
 		{
-			temp = *head;
-			*head = (*head)->next;
-			free(temp);
+			if (*head == list[i])
+			{
+				*head = NULL;
+				free(list);
+				return (num);
+			}
 		}
-		else
-		{
-			free(*head);
-			count++;
-			break;
-		}
+		num++;
+		list = _ra(list, num, *head);
+		next = (*head)->next;
+		free(*head);
+		*head = next;
 	}
-	*head = NULL;
-	return (count);
+	free(list);
+	return (num);
 }
