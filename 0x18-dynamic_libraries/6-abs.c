@@ -7,5 +7,5 @@
  */
 int _abs(int v)
 {
-	return (abs(v));
+	return (_abs(v));
 }
